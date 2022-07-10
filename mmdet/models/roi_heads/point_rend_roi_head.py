@@ -129,7 +129,7 @@ class PointRendRoIHead(StandardRoIHead):
             num_rois, channels, mask_height, mask_width = \
                 refined_mask_pred.shape
             if (self.test_cfg.subdivision_num_points >=
-                    self.test_cfg.scale_factor**2 * mask_height * mask_width
+                    self.test_cfg.scale_factor ** 2 * mask_height * mask_width
                     and
                     subdivision_step < self.test_cfg.subdivision_steps - 1):
                 continue
@@ -307,7 +307,7 @@ class PointRendRoIHead(StandardRoIHead):
             num_rois, channels, mask_height, mask_width = \
                 refined_mask_pred.shape
             if (self.test_cfg.subdivision_num_points >=
-                    self.test_cfg.scale_factor**2 * mask_height * mask_width
+                    self.test_cfg.scale_factor ** 2 * mask_height * mask_width
                     and
                     subdivision_step < self.test_cfg.subdivision_steps - 1):
                 continue
@@ -335,7 +335,7 @@ class PointRendRoIHead(StandardRoIHead):
                     1, point_shape[1], 1).expand_as(point_indices)
                 inds_1d = inds_dim0.reshape(
                     -1) * mask_shape[1] * mask_shape[2] + inds_dim1.reshape(
-                        -1) * mask_shape[2] + point_indices.reshape(-1)
+                    -1) * mask_shape[2] + point_indices.reshape(-1)
                 refined_mask_pred = refined_mask_pred.reshape(-1)
                 refined_mask_pred[inds_1d] = mask_point_pred.reshape(-1)
                 refined_mask_pred = refined_mask_pred.reshape(*mask_shape)
@@ -372,7 +372,7 @@ class PointRendRoIHead(StandardRoIHead):
         det_bboxes = det_bboxes[..., :4]
         batch_index = torch.arange(
             det_bboxes.size(0), device=det_bboxes.device).float().view(
-                -1, 1, 1).expand(det_bboxes.size(0), det_bboxes.size(1), 1)
+            -1, 1, 1).expand(det_bboxes.size(0), det_bboxes.size(1), 1)
         mask_rois = torch.cat([batch_index, det_bboxes], dim=-1)
         mask_rois = mask_rois.view(-1, 5)
         mask_results = self._mask_forward(x, mask_rois)

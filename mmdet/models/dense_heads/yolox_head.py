@@ -382,10 +382,10 @@ class YOLOXHead(BaseDenseHead, BBoxTestMixin):
 
         (pos_masks, cls_targets, obj_targets, bbox_targets, l1_targets,
          num_fg_imgs) = multi_apply(
-             self._get_target_single, flatten_cls_preds.detach(),
-             flatten_objectness.detach(),
-             flatten_priors.unsqueeze(0).repeat(num_imgs, 1, 1),
-             flatten_bboxes.detach(), gt_bboxes, gt_labels)
+            self._get_target_single, flatten_cls_preds.detach(),
+            flatten_objectness.detach(),
+            flatten_priors.unsqueeze(0).repeat(num_imgs, 1, 1),
+            flatten_bboxes.detach(), gt_bboxes, gt_labels)
 
         # The experimental results show that ‘reduce_mean’ can improve
         # performance on the COCO dataset.

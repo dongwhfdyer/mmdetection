@@ -94,7 +94,7 @@ def test_classification_losses(loss_class, input_shape):
             f'tensor.')
 
     pred = torch.rand(input_shape)
-    target = torch.randint(0, 5, (input_shape[0], ))
+    target = torch.randint(0, 5, (input_shape[0],))
 
     # Test loss forward
     loss = loss_class()(pred, target)
@@ -145,9 +145,9 @@ def test_loss_with_ignore_index(use_sigmoid, reduction, avg_non_ignore):
         ignore_index=255,
         avg_non_ignore=avg_non_ignore)
     pred = torch.rand((10, 5))
-    target = torch.randint(0, 5, (10, ))
+    target = torch.randint(0, 5, (10,))
 
-    ignored_indices = torch.randint(0, 10, (2, ), dtype=torch.long)
+    ignored_indices = torch.randint(0, 10, (2,), dtype=torch.long)
     target[ignored_indices] = 255
 
     # Test loss forward with default ignore
@@ -173,7 +173,7 @@ def test_loss_with_ignore_index(use_sigmoid, reduction, avg_non_ignore):
 
     # test ignore all target
     pred = torch.rand((10, 5))
-    target = torch.ones((10, ), dtype=torch.long) * 255
+    target = torch.ones((10,), dtype=torch.long) * 255
     loss = loss_class(pred, target, reduction_override=reduction)
     assert loss == 0
 

@@ -22,7 +22,7 @@ model = dict(
             depth=18,
             base_channels=2,
             num_stages=4,
-            out_indices=(3, ),
+            out_indices=(3,),
             style='pytorch'),
         neck=dict(type='GlobalAveragePooling', kernel_size=(8, 4), stride=1),
         head=dict(

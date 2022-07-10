@@ -86,7 +86,7 @@ class MaskFormerFusionHead(BasePanopticFusionHead):
                         panoptic_seg[mask] = pred_class
                     else:
                         panoptic_seg[mask] = (
-                            pred_class + instance_id * INSTANCE_OFFSET)
+                                pred_class + instance_id * INSTANCE_OFFSET)
                         instance_id += 1
 
         return panoptic_seg
@@ -135,7 +135,7 @@ class MaskFormerFusionHead(BasePanopticFusionHead):
         # shape (num_queries, num_class)
         scores = F.softmax(mask_cls, dim=-1)[:, :-1]
         # shape (num_queries * num_class, )
-        labels = torch.arange(self.num_classes, device=mask_cls.device).\
+        labels = torch.arange(self.num_classes, device=mask_cls.device). \
             unsqueeze(0).repeat(num_queries, 1).flatten(0, 1)
         scores_per_image, top_indices = scores.flatten(0, 1).topk(
             max_per_image, sorted=False)
@@ -153,7 +153,7 @@ class MaskFormerFusionHead(BasePanopticFusionHead):
         mask_pred_binary = (mask_pred > 0).float()
         mask_scores_per_image = (mask_pred.sigmoid() *
                                  mask_pred_binary).flatten(1).sum(1) / (
-                                     mask_pred_binary.flatten(1).sum(1) + 1e-6)
+                                        mask_pred_binary.flatten(1).sum(1) + 1e-6)
         det_scores = scores_per_image * mask_scores_per_image
         mask_pred_binary = mask_pred_binary.bool()
         bboxes = mask2bbox(mask_pred_binary)
@@ -201,8 +201,8 @@ class MaskFormerFusionHead(BasePanopticFusionHead):
         panoptic_on = self.test_cfg.get('panoptic_on', True)
         semantic_on = self.test_cfg.get('semantic_on', False)
         instance_on = self.test_cfg.get('instance_on', False)
-        assert not semantic_on, 'segmantic segmentation '\
-            'results are not supported yet.'
+        assert not semantic_on, 'segmantic segmentation ' \
+                                'results are not supported yet.'
 
         results = []
         for mask_cls_result, mask_pred_result, meta in zip(

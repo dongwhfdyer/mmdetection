@@ -186,7 +186,7 @@ class MSDeformAttnPixelDecoder(BaseModule):
 
             # no padding
             padding_mask_resized = feat.new_zeros(
-                (batch_size, ) + feat.shape[-2:], dtype=torch.bool)
+                (batch_size,) + feat.shape[-2:], dtype=torch.bool)
             pos_embed = self.postional_encoding(padding_mask_resized)
             level_embed = self.level_encoding.weight[i]
             level_pos_embed = level_embed.view(1, -1, 1, 1) + pos_embed
@@ -221,7 +221,7 @@ class MSDeformAttnPixelDecoder(BaseModule):
             spatial_shapes, dtype=torch.long, device=device)
         # shape (0, h_0*w_0, h_0*w_0+h_1*w_1, ...)
         level_start_index = torch.cat((spatial_shapes.new_zeros(
-            (1, )), spatial_shapes.prod(1).cumsum(0)[:-1]))
+            (1,)), spatial_shapes.prod(1).cumsum(0)[:-1]))
         reference_points = torch.cat(reference_points_list, dim=0)
         reference_points = reference_points[None, :, None].repeat(
             batch_size, 1, self.num_encoder_levels, 1)

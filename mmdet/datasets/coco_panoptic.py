@@ -615,13 +615,12 @@ class CocoPanopticDataset(CocoDataset):
 
         if (('bbox' in metrics) or ('segm' in metrics)
                 or ('proposal' in metrics)):
-
             assert 'ins_results' in results[0], 'instance segmentation' \
-                'results are absent from results'
+                                                'results are absent from results'
 
-            assert self.ins_ann_file is not None, 'Annotation '\
-                'file for instance segmentation or object detection ' \
-                'shuold not be None'
+            assert self.ins_ann_file is not None, 'Annotation ' \
+                                                  'file for instance segmentation or object detection ' \
+                                                  'shuold not be None'
 
             coco_gt = COCO(self.ins_ann_file)
             panoptic_cat_ids = self.cat_ids
@@ -676,8 +675,8 @@ def print_panoptic_table(pq_results, classwise_results=None, logger=None):
     print_log('Panoptic Evaluation Results:\n' + table.table, logger=logger)
 
     if classwise_results is not None:
-        class_metrics = [(name, ) + tuple(f'{(metrics[k] * 100):0.3f}'
-                                          for k in ['pq', 'sq', 'rq'])
+        class_metrics = [(name,) + tuple(f'{(metrics[k] * 100):0.3f}'
+                                         for k in ['pq', 'sq', 'rq'])
                          for name, metrics in classwise_results.items()]
         num_columns = min(8, len(class_metrics) * 4)
         results_flatten = list(itertools.chain(*class_metrics))

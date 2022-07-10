@@ -48,7 +48,7 @@ class StandardRoIHead(BaseRoIHead, BBoxTestMixin, MaskTestMixin):
         if self.with_mask:
             mask_rois = rois[:100]
             mask_results = self._mask_forward(x, mask_rois)
-            outs = outs + (mask_results['mask_pred'], )
+            outs = outs + (mask_results['mask_pred'],)
         return outs
 
     def forward_train(self,
@@ -331,7 +331,7 @@ class StandardRoIHead(BaseRoIHead, BBoxTestMixin, MaskTestMixin):
         det_bboxes = det_bboxes[..., :4]
         batch_index = torch.arange(
             det_bboxes.size(0), device=det_bboxes.device).float().view(
-                -1, 1, 1).expand(det_bboxes.size(0), det_bboxes.size(1), 1)
+            -1, 1, 1).expand(det_bboxes.size(0), det_bboxes.size(1), 1)
         mask_rois = torch.cat([batch_index, det_bboxes], dim=-1)
         mask_rois = mask_rois.view(-1, 5)
         mask_results = self._mask_forward(x, mask_rois)
@@ -372,7 +372,7 @@ class StandardRoIHead(BaseRoIHead, BBoxTestMixin, MaskTestMixin):
 
         batch_index = torch.arange(
             rois.size(0), device=rois.device).float().view(-1, 1, 1).expand(
-                rois.size(0), rois.size(1), 1)
+            rois.size(0), rois.size(1), 1)
 
         rois = torch.cat([batch_index, rois[..., :4]], dim=-1)
         batch_size = rois.shape[0]

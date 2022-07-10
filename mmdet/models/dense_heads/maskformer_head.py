@@ -260,7 +260,7 @@ class MaskFormerHead(AnchorFreeHead):
         neg_inds = sampling_result.neg_inds
 
         # label target
-        labels = gt_labels.new_full((self.num_queries, ),
+        labels = gt_labels.new_full((self.num_queries,),
                                     self.num_classes,
                                     dtype=torch.long)
         labels[pos_inds] = gt_labels[sampling_result.pos_assigned_gt_inds]
@@ -268,7 +268,7 @@ class MaskFormerHead(AnchorFreeHead):
 
         # mask target
         mask_targets = gt_masks[sampling_result.pos_assigned_gt_inds]
-        mask_weights = mask_pred.new_zeros((self.num_queries, ))
+        mask_weights = mask_pred.new_zeros((self.num_queries,))
         mask_weights[pos_inds] = 1.0
 
         return (labels, label_weights, mask_targets, mask_weights, pos_inds,

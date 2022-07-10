@@ -16,11 +16,11 @@ log_config = dict(
         dict(type='TextLoggerHook'),
         dict(type='MMDetWandbHook',
              init_kwargs={
-                'project': 'mmdetection',
-                'group': 'maskrcnn-r50-fpn-1x-coco'
+                 'project': 'mmdetection',
+                 'group': 'maskrcnn-r50-fpn-1x-coco'
              },
              interval=50,
              log_checkpoint=True,
              log_checkpoint_metadata=True,
              num_eval_images=100)
-        ])
+    ])

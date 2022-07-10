@@ -177,7 +177,7 @@ def sync_random_seed(seed=None, device='cuda'):
         int: Seed to be used.
     """
     if seed is None:
-        seed = np.random.randint(2**31)
+        seed = np.random.randint(2 ** 31)
     assert isinstance(seed, int)
 
     rank, world_size = get_dist_info()

@@ -505,7 +505,7 @@ class YOLACTSegmHead(BaseModule):
         """
         return self.segm_conv(x)
 
-    @force_fp32(apply_to=('segm_pred', ))
+    @force_fp32(apply_to=('segm_pred',))
     def loss(self, segm_pred, gt_masks, gt_labels):
         """Compute loss of the head.
 
@@ -739,7 +739,7 @@ class YOLACTProtonet(BaseModule):
             mask_pred_list.append(mask_pred)
         return mask_pred_list
 
-    @force_fp32(apply_to=('mask_pred', ))
+    @force_fp32(apply_to=('mask_pred',))
     def loss(self, mask_pred, gt_masks, gt_bboxes, img_meta, sampling_results):
         """Compute loss of the head.
 

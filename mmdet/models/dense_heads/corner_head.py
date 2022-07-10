@@ -784,7 +784,7 @@ class CornerHead(BaseDenseHead, BBoxTestMixin):
         if labels.numel() > 0:
             max_num = cfg.max_per_img
             bboxes, keep = batched_nms(bboxes[:, :4], bboxes[:,
-                                                             -1].contiguous(),
+                                                      -1].contiguous(),
                                        labels, cfg.nms)
             if max_num > 0:
                 bboxes = bboxes[:max_num]
@@ -844,8 +844,8 @@ class CornerHead(BaseDenseHead, BBoxTestMixin):
         """
         with_embedding = tl_emb is not None and br_emb is not None
         with_centripetal_shift = (
-            tl_centripetal_shift is not None
-            and br_centripetal_shift is not None)
+                tl_centripetal_shift is not None
+                and br_centripetal_shift is not None)
         assert with_embedding + with_centripetal_shift == 1
         batch, _, height, width = tl_heat.size()
         if torch.onnx.is_in_onnx_export():
@@ -968,13 +968,13 @@ class CornerHead(BaseDenseHead, BBoxTestMixin):
             dists = area_ct_bboxes / area_rcentral
 
             tl_ctx_inds = (ct_bboxes[..., 0] <= rcentral[..., 0]) | (
-                ct_bboxes[..., 0] >= rcentral[..., 2])
+                    ct_bboxes[..., 0] >= rcentral[..., 2])
             tl_cty_inds = (ct_bboxes[..., 1] <= rcentral[..., 1]) | (
-                ct_bboxes[..., 1] >= rcentral[..., 3])
+                    ct_bboxes[..., 1] >= rcentral[..., 3])
             br_ctx_inds = (ct_bboxes[..., 2] <= rcentral[..., 0]) | (
-                ct_bboxes[..., 2] >= rcentral[..., 2])
+                    ct_bboxes[..., 2] >= rcentral[..., 2])
             br_cty_inds = (ct_bboxes[..., 3] <= rcentral[..., 1]) | (
-                ct_bboxes[..., 3] >= rcentral[..., 3])
+                    ct_bboxes[..., 3] >= rcentral[..., 3])
 
         if with_embedding:
             tl_emb = transpose_and_gather_feat(tl_emb, tl_inds)

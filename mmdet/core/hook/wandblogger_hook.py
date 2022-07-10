@@ -104,7 +104,7 @@ class MMDetWandbHook(WandbLoggerHook):
 
         self.log_checkpoint = log_checkpoint
         self.log_checkpoint_metadata = (
-            log_checkpoint and log_checkpoint_metadata)
+                log_checkpoint and log_checkpoint_metadata)
         self.num_eval_images = num_eval_images
         self.bbox_score_thr = bbox_score_thr
         self.log_evaluation = (num_eval_images > 0)

@@ -33,7 +33,6 @@ def parse_args():
 
 
 def download(url, dir, unzip=True, delete=False, threads=1):
-
     def download_one(url, dir):
         f = dir / Path(url).name
         if Path(url).is_file():

@@ -75,10 +75,10 @@ class MaskHungarianAssigner(BaseAssigner):
         num_gt, num_query = gt_labels.shape[0], mask_pred.shape[0]
 
         # 1. assign -1 by default
-        assigned_gt_inds = mask_pred.new_full((num_query, ),
+        assigned_gt_inds = mask_pred.new_full((num_query,),
                                               -1,
                                               dtype=torch.long)
-        assigned_labels = mask_pred.new_full((num_query, ),
+        assigned_labels = mask_pred.new_full((num_query,),
                                              -1,
                                              dtype=torch.long)
         if num_gt == 0 or num_query == 0:

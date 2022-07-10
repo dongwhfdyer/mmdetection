@@ -73,7 +73,7 @@ class TaskDecomposition(nn.Module):
         conv_weight = weight.reshape(
             b, 1, self.stacked_convs,
             1) * self.reduction_conv.conv.weight.reshape(
-                1, self.feat_channels, self.stacked_convs, self.feat_channels)
+            1, self.feat_channels, self.stacked_convs, self.feat_channels)
         conv_weight = conv_weight.reshape(b, self.feat_channels,
                                           self.in_channels)
         feat = feat.reshape(b, self.in_channels, h * w)
@@ -439,17 +439,17 @@ class TOODHead(ATSSHead):
         (anchor_list, labels_list, label_weights_list, bbox_targets_list,
          alignment_metrics_list) = cls_reg_targets
 
-        losses_cls, losses_bbox,\
-            cls_avg_factors, bbox_avg_factors = multi_apply(
-                self.loss_single,
-                anchor_list,
-                cls_scores,
-                bbox_preds,
-                labels_list,
-                label_weights_list,
-                bbox_targets_list,
-                alignment_metrics_list,
-                self.prior_generator.strides)
+        losses_cls, losses_bbox, \
+        cls_avg_factors, bbox_avg_factors = multi_apply(
+            self.loss_single,
+            anchor_list,
+            cls_scores,
+            bbox_preds,
+            labels_list,
+            label_weights_list,
+            bbox_targets_list,
+            alignment_metrics_list,
+            self.prior_generator.strides)
 
         cls_avg_factor = reduce_mean(sum(cls_avg_factors)).clamp_(min=1).item()
         losses_cls = list(map(lambda x: x / cls_avg_factor, losses_cls))
@@ -519,7 +519,6 @@ class TOODHead(ATSSHead):
         for cls_score, bbox_pred, priors, stride in zip(
                 cls_score_list, bbox_pred_list, mlvl_priors,
                 self.prior_generator.strides):
-
             assert cls_score.size()[-2:] == bbox_pred.size()[-2:]
 
             bbox_pred = bbox_pred.permute(1, 2, 0).reshape(-1, 4) * stride[0]
@@ -617,33 +616,33 @@ class TOODHead(ATSSHead):
         if self.epoch < self.initial_epoch:
             (all_anchors, all_labels, all_label_weights, all_bbox_targets,
              all_bbox_weights, pos_inds_list, neg_inds_list) = multi_apply(
-                 super()._get_target_single,
-                 anchor_list,
-                 valid_flag_list,
-                 num_level_anchors_list,
-                 gt_bboxes_list,
-                 gt_bboxes_ignore_list,
-                 gt_labels_list,
-                 img_metas,
-                 label_channels=label_channels,
-                 unmap_outputs=unmap_outputs)
+                super()._get_target_single,
+                anchor_list,
+                valid_flag_list,
+                num_level_anchors_list,
+                gt_bboxes_list,
+                gt_bboxes_ignore_list,
+                gt_labels_list,
+                img_metas,
+                label_channels=label_channels,
+                unmap_outputs=unmap_outputs)
             all_assign_metrics = [
                 weight[..., 0] for weight in all_bbox_weights
             ]
         else:
             (all_anchors, all_labels, all_label_weights, all_bbox_targets,
              all_assign_metrics) = multi_apply(
-                 self._get_target_single,
-                 cls_scores,
-                 bbox_preds,
-                 anchor_list,
-                 valid_flag_list,
-                 gt_bboxes_list,
-                 gt_bboxes_ignore_list,
-                 gt_labels_list,
-                 img_metas,
-                 label_channels=label_channels,
-                 unmap_outputs=unmap_outputs)
+                self._get_target_single,
+                cls_scores,
+                bbox_preds,
+                anchor_list,
+                valid_flag_list,
+                gt_bboxes_list,
+                gt_bboxes_ignore_list,
+                gt_labels_list,
+                img_metas,
+                label_channels=label_channels,
+                unmap_outputs=unmap_outputs)
         # no valid anchors
         if any([labels is None for labels in all_labels]):
             return None
@@ -710,7 +709,7 @@ class TOODHead(ATSSHead):
                                            img_meta['img_shape'][:2],
                                            self.train_cfg.allowed_border)
         if not inside_flags.any():
-            return (None, ) * 7
+            return (None,) * 7
         # assign gt and sample anchors
         anchors = flat_anchors[inside_flags, :]
         assign_result = self.alignment_assigner.assign(
@@ -724,7 +723,7 @@ class TOODHead(ATSSHead):
 
         num_valid_anchors = anchors.shape[0]
         bbox_targets = torch.zeros_like(anchors)
-        labels = anchors.new_full((num_valid_anchors, ),
+        labels = anchors.new_full((num_valid_anchors,),
                                   self.num_classes,
                                   dtype=torch.long)
         label_weights = anchors.new_zeros(num_valid_anchors, dtype=torch.float)
@@ -760,7 +759,7 @@ class TOODHead(ATSSHead):
             pos_alignment_metrics = assign_metrics[gt_class_inds]
             pos_ious = assign_ious[gt_class_inds]
             pos_norm_alignment_metrics = pos_alignment_metrics / (
-                pos_alignment_metrics.max() + 10e-8) * pos_ious.max()
+                    pos_alignment_metrics.max() + 10e-8) * pos_ious.max()
             norm_alignment_metrics[gt_class_inds] = pos_norm_alignment_metrics
 
         # map up to original set of anchors

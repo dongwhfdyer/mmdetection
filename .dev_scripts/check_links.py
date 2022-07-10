@@ -17,7 +17,7 @@ from mmcv.utils import get_logger
 def parse_args():
     parser = argparse.ArgumentParser(
         description='Goes through all the inline-links '
-        'in markdown files and reports the breakages')
+                    'in markdown files and reports the breakages')
     parser.add_argument(
         '--num-threads',
         type=int,

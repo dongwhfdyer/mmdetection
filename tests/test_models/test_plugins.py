@@ -36,7 +36,7 @@ def test_pixel_decoder():
     pixel_decoder_cfg = ConfigDict(
         dict(
             type='PixelDecoder',
-            in_channels=[base_channels * 2**i for i in range(4)],
+            in_channels=[base_channels * 2 ** i for i in range(4)],
             feat_channels=base_channels,
             out_channels=base_channels,
             norm_cfg=dict(type='GN', num_groups=32),
@@ -44,7 +44,7 @@ def test_pixel_decoder():
     self = build_plugin_layer(pixel_decoder_cfg)[1]
     img_metas = [{}, {}]
     feats = [
-        torch.rand((2, base_channels * 2**i, 4 * 2**(3 - i), 5 * 2**(3 - i)))
+        torch.rand((2, base_channels * 2 ** i, 4 * 2 ** (3 - i), 5 * 2 ** (3 - i)))
         for i in range(4)
     ]
     mask_feature, memory = self(feats, img_metas)
@@ -58,7 +58,7 @@ def test_transformer_encoder_pixel_decoder():
     pixel_decoder_cfg = ConfigDict(
         dict(
             type='TransformerEncoderPixelDecoder',
-            in_channels=[base_channels * 2**i for i in range(4)],
+            in_channels=[base_channels * 2 ** i for i in range(4)],
             feat_channels=base_channels,
             out_channels=base_channels,
             norm_cfg=dict(type='GN', num_groups=32),
@@ -102,7 +102,7 @@ def test_transformer_encoder_pixel_decoder():
         'img_shape': (125, 160, 3),
     }]
     feats = [
-        torch.rand((2, base_channels * 2**i, 4 * 2**(3 - i), 5 * 2**(3 - i)))
+        torch.rand((2, base_channels * 2 ** i, 4 * 2 ** (3 - i), 5 * 2 ** (3 - i)))
         for i in range(4)
     ]
     mask_feature, memory = self(feats, img_metas)
@@ -116,7 +116,7 @@ def test_msdeformattn_pixel_decoder():
     pixel_decoder_cfg = ConfigDict(
         dict(
             type='MSDeformAttnPixelDecoder',
-            in_channels=[base_channels * 2**i for i in range(4)],
+            in_channels=[base_channels * 2 ** i for i in range(4)],
             strides=[4, 8, 16, 32],
             feat_channels=base_channels,
             out_channels=base_channels,
@@ -155,7 +155,7 @@ def test_msdeformattn_pixel_decoder():
             init_cfg=None), )
     self = build_plugin_layer(pixel_decoder_cfg)[1]
     feats = [
-        torch.rand((2, base_channels * 2**i, 4 * 2**(3 - i), 5 * 2**(3 - i)))
+        torch.rand((2, base_channels * 2 ** i, 4 * 2 ** (3 - i), 5 * 2 ** (3 - i)))
         for i in range(4)
     ]
     mask_feature, multi_scale_features = self(feats)

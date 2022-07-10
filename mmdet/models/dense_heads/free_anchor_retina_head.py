@@ -102,7 +102,7 @@ class FreeAnchorRetinaHead(RetinaHead):
         positive_losses = []
         for _, (anchors_, gt_labels_, gt_bboxes_, cls_prob_,
                 bbox_preds_) in enumerate(
-                    zip(anchors, gt_labels, gt_bboxes, cls_prob, bbox_preds)):
+            zip(anchors, gt_labels, gt_bboxes, cls_prob, bbox_preds)):
 
             with torch.no_grad():
                 if len(gt_bboxes_) == 0:
@@ -122,14 +122,14 @@ class FreeAnchorRetinaHead(RetinaHead):
                         dim=1, keepdim=True).values.clamp(min=t1 + 1e-12)
                     object_box_prob = ((object_box_iou - t1) /
                                        (t2 - t1)).clamp(
-                                           min=0, max=1)
+                        min=0, max=1)
 
                     # object_cls_box_prob: P{a_{j} -> b_{i}}, shape: [i, c, j]
                     num_obj = gt_labels_.size(0)
                     indices = torch.stack([
                         torch.arange(num_obj).type_as(gt_labels_), gt_labels_
                     ],
-                                          dim=0)
+                        dim=0)
                     object_cls_box_prob = torch.sparse_coo_tensor(
                         indices, object_box_prob)
 
@@ -267,6 +267,6 @@ class FreeAnchorRetinaHead(RetinaHead):
         # There are some cases when neg_prob = 0.
         # This will cause the neg_prob.log() to be inf without clamp.
         prob = prob.clamp(min=EPS, max=1 - EPS)
-        negative_bag_loss = prob**self.gamma * F.binary_cross_entropy(
+        negative_bag_loss = prob ** self.gamma * F.binary_cross_entropy(
             prob, torch.zeros_like(prob), reduction='none')
         return (1 - self.alpha) * negative_bag_loss

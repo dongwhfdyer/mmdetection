@@ -16,7 +16,6 @@ from .coco import CocoDataset
 
 @DATASETS.register_module()
 class LVISV05Dataset(CocoDataset):
-
     CLASSES = (
         'acorn', 'aerosol_can', 'air_conditioner', 'airplane', 'alarm_clock',
         'alcohol', 'alligator', 'almond', 'ambulance', 'amplifier', 'anklet',
@@ -351,7 +350,7 @@ class LVISV05Dataset(CocoDataset):
         assert isinstance(results, list), 'results must be a list'
         assert len(results) == len(self), (
             'The length of results is not equal to the dataset len: {} != {}'.
-            format(len(results), len(self)))
+                format(len(results), len(self)))
 
         metrics = metric if isinstance(metric, list) else [metric]
         allowed_metrics = ['bbox', 'segm', 'proposal', 'proposal_fast']
@@ -473,7 +472,6 @@ DATASETS.register_module(name='LVISDataset', module=LVISDataset)
 
 @DATASETS.register_module()
 class LVISV1Dataset(LVISDataset):
-
     CLASSES = (
         'aerosol_can', 'air_conditioner', 'airplane', 'alarm_clock', 'alcohol',
         'alligator', 'almond', 'ambulance', 'amplifier', 'anklet', 'antenna',

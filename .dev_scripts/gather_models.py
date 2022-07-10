@@ -13,7 +13,6 @@ import yaml
 
 
 def ordered_yaml_dump(data, stream=None, Dumper=yaml.SafeDumper, **kwds):
-
     class OrderedDumper(Dumper):
         pass
 
@@ -65,7 +64,7 @@ def get_best_epoch_or_iter(exp_dir):
     best_epoch_iter_full_path = list(
         sorted(glob.glob(osp.join(exp_dir, 'best_*.pth'))))[-1]
     best_epoch_or_iter_model_path = best_epoch_iter_full_path.split('/')[-1]
-    best_epoch_or_iter = best_epoch_or_iter_model_path.\
+    best_epoch_or_iter = best_epoch_or_iter_model_path. \
         split('_')[-1].split('.')[0]
     return best_epoch_or_iter_model_path, int(best_epoch_or_iter)
 
@@ -284,7 +283,7 @@ def main():
             model_time=model_time,
             final_model=final_model,
             log_json_path=osp.split(log_json_path)[-1])
-        model_info['epochs' if by_epoch else 'iterations'] =\
+        model_info['epochs' if by_epoch else 'iterations'] = \
             final_epoch_or_iter
         model_infos.append(model_info)
 

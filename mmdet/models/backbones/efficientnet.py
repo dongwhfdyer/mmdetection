@@ -60,7 +60,7 @@ class EdgeResidual(BaseModule):
             drop_path_rate) if drop_path_rate > 0 else nn.Identity()
         self.with_se = se_cfg is not None
         self.with_residual = (
-            stride == 1 and in_channels == out_channels and with_residual)
+                stride == 1 and in_channels == out_channels and with_residual)
 
         if self.with_se:
             assert isinstance(se_cfg, dict)
@@ -145,7 +145,7 @@ def model_scaling(layer_setting, arch_setting):
             tmp_layer_cfg = layer_cfg[:new_layers[i]]
         else:
             tmp_layer_cfg = copy.deepcopy(layer_cfg) + [layer_cfg[-1]] * (
-                new_layers[i] - num_of_layers[i])
+                    new_layers[i] - num_of_layers[i])
         if tmp_layer_cfg[0][3] == 1 and i != 0:
             merge_layer_setting[-1] += tmp_layer_cfg.copy()
         else:
@@ -254,7 +254,7 @@ class EfficientNet(BaseModule):
     def __init__(self,
                  arch='b0',
                  drop_path_rate=0.,
-                 out_indices=(6, ),
+                 out_indices=(6,),
                  frozen_stages=0,
                  conv_cfg=dict(type='Conv2dAdaptivePadding'),
                  norm_cfg=dict(type='BN', eps=1e-3),

@@ -142,7 +142,6 @@ def check_optimizer_lr_wd(optimizer, gt_lr_wd):
 
 
 def test_learning_rate_decay_optimizer_constructor():
-
     # Test lr wd for ConvNeXT
     backbone = ToyConvNeXt()
     model = PseudoDataParallel(ToyDetector(backbone))

@@ -80,11 +80,11 @@ class Mask2FormerHead(MaskFormerHead):
         self.num_classes = self.num_things_classes + self.num_stuff_classes
         self.num_queries = num_queries
         self.num_transformer_feat_level = num_transformer_feat_level
-        self.num_heads = transformer_decoder.transformerlayers.\
+        self.num_heads = transformer_decoder.transformerlayers. \
             attn_cfgs.num_heads
         self.num_transformer_decoder_layers = transformer_decoder.num_layers
-        assert pixel_decoder.encoder.transformerlayers.\
-            attn_cfgs.num_levels == num_transformer_feat_level
+        assert pixel_decoder.encoder.transformerlayers. \
+                   attn_cfgs.num_levels == num_transformer_feat_level
         pixel_decoder_ = copy.deepcopy(pixel_decoder)
         pixel_decoder_.update(
             in_channels=in_channels,
@@ -201,15 +201,15 @@ class Mask2FormerHead(MaskFormerHead):
         neg_inds = sampling_result.neg_inds
 
         # label target
-        labels = gt_labels.new_full((self.num_queries, ),
+        labels = gt_labels.new_full((self.num_queries,),
                                     self.num_classes,
                                     dtype=torch.long)
         labels[pos_inds] = gt_labels[sampling_result.pos_assigned_gt_inds]
-        label_weights = gt_labels.new_ones((self.num_queries, ))
+        label_weights = gt_labels.new_ones((self.num_queries,))
 
         # mask target
         mask_targets = gt_masks[sampling_result.pos_assigned_gt_inds]
-        mask_weights = mask_pred.new_zeros((self.num_queries, ))
+        mask_weights = mask_pred.new_zeros((self.num_queries,))
         mask_weights[pos_inds] = 1.0
 
         return (labels, label_weights, mask_targets, mask_weights, pos_inds,
@@ -380,7 +380,7 @@ class Mask2FormerHead(MaskFormerHead):
             decoder_input = decoder_input + level_embed
             # shape (batch_size, c, h, w) -> (h*w, batch_size, c)
             mask = decoder_input.new_zeros(
-                (batch_size, ) + multi_scale_memorys[i].shape[-2:],
+                (batch_size,) + multi_scale_memorys[i].shape[-2:],
                 dtype=torch.bool)
             decoder_positional_encoding = self.decoder_positional_encoding(
                 mask)
@@ -422,7 +422,7 @@ class Mask2FormerHead(MaskFormerHead):
                 key_padding_mask=None)
             cls_pred, mask_pred, attn_mask = self.forward_head(
                 query_feat, mask_features, multi_scale_memorys[
-                    (i + 1) % self.num_transformer_feat_level].shape[-2:])
+                                               (i + 1) % self.num_transformer_feat_level].shape[-2:])
 
             cls_pred_list.append(cls_pred)
             mask_pred_list.append(mask_pred)

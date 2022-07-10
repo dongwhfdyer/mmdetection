@@ -42,9 +42,9 @@ class TwoStagePanopticSegmentor(TwoStageDetector):
             panoptic_fusion_head_.update(test_cfg=panoptic_cfg)
             self.panoptic_fusion_head = build_head(panoptic_fusion_head_)
 
-            self.num_things_classes = self.panoptic_fusion_head.\
+            self.num_things_classes = self.panoptic_fusion_head. \
                 num_things_classes
-            self.num_stuff_classes = self.panoptic_fusion_head.\
+            self.num_stuff_classes = self.panoptic_fusion_head. \
                 num_stuff_classes
             self.num_classes = self.panoptic_fusion_head.num_classes
 
@@ -114,7 +114,7 @@ class TwoStagePanopticSegmentor(TwoStageDetector):
         """Simple test for mask head without augmentation."""
         img_shapes = tuple(meta['ori_shape']
                            for meta in img_metas) if rescale else tuple(
-                               meta['pad_shape'] for meta in img_metas)
+            meta['pad_shape'] for meta in img_metas)
         scale_factors = tuple(meta['scale_factor'] for meta in img_metas)
 
         if all(det_bbox.shape[0] == 0 for det_bbox in det_bboxes):

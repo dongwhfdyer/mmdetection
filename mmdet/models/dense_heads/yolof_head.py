@@ -361,7 +361,7 @@ class YOLOFHead(AnchorHead):
                                            img_meta['img_shape'][:2],
                                            self.train_cfg.allowed_border)
         if not inside_flags.any():
-            return (None, ) * 8
+            return (None,) * 8
         # assign gt and sample anchors
         anchors = flat_anchors[inside_flags, :]
         bbox_preds = bbox_preds.reshape(-1, 4)
@@ -381,7 +381,7 @@ class YOLOFHead(AnchorHead):
         sampling_result = self.sampler.sample(assign_result, anchors,
                                               gt_bboxes)
         num_valid_anchors = anchors.shape[0]
-        labels = anchors.new_full((num_valid_anchors, ),
+        labels = anchors.new_full((num_valid_anchors,),
                                   self.num_classes,
                                   dtype=torch.long)
         label_weights = anchors.new_zeros(num_valid_anchors, dtype=torch.float)

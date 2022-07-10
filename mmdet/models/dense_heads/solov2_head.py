@@ -342,7 +342,7 @@ class SOLOV2Head(SOLOHead):
             labels = torch.zeros([num_grid, num_grid],
                                  dtype=torch.int64,
                                  device=device) + self.num_classes
-            pos_mask = torch.zeros([num_grid**2],
+            pos_mask = torch.zeros([num_grid ** 2],
                                    dtype=torch.bool,
                                    device=device)
 
@@ -423,7 +423,7 @@ class SOLOV2Head(SOLOHead):
                             dtype=torch.uint8,
                             device=device)
                         this_mask_target[:gt_mask.shape[0], :gt_mask.
-                                         shape[1]] = gt_mask
+                            shape[1]] = gt_mask
                         mask_target.append(this_mask_target)
                         pos_mask[index] = True
                         pos_index.append(index)

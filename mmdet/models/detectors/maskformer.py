@@ -168,8 +168,8 @@ class MaskFormer(SingleStageDetector):
                     mask_results[label].append(mask)
                 results[i]['ins_results'] = bbox_results, mask_results
 
-            assert 'sem_results' not in results[i], 'segmantic segmentation '\
-                'results are not supported yet.'
+            assert 'sem_results' not in results[i], 'segmantic segmentation ' \
+                                                    'results are not supported yet.'
 
         if self.num_stuff_classes == 0:
             results = [res['ins_results'] for res in results]

@@ -30,7 +30,7 @@ def test_dataset_wrapper():
             np.random.randint(1, 5, (2, 2)),
             np.random.randint(1, 5, (2, 2)) + 5
         ],
-                                 axis=1)
+            axis=1)
         gt_labels = np.random.randint(0, 80, 2)
         ann_info_list_a.append(
             dict(gt_bboxes=gt_bbox, gt_labels=gt_labels, img=img))
@@ -56,7 +56,7 @@ def test_dataset_wrapper():
             np.random.randint(1, 5, (2, 2)),
             np.random.randint(1, 5, (2, 2)) + 5
         ],
-                                 axis=1)
+            axis=1)
         gt_labels = np.random.randint(0, 80, 2)
         ann_info_list_b.append(
             dict(gt_bboxes=gt_bbox, gt_labels=gt_labels, img=img))
@@ -166,7 +166,7 @@ def test_dataset_wrapper():
             np.random.randint(1, 5, (2, 2)),
             np.random.randint(1, 5, (2, 2)) + 5
         ],
-                                 axis=1)
+            axis=1)
         gt_labels = np.random.randint(0, 80, 2)
         results.append(dict(gt_bboxes=gt_bbox, gt_labels=gt_labels, img=img))
 

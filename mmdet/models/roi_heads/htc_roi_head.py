@@ -80,7 +80,7 @@ class HybridTaskCascadeRoIHead(CascadeRoIHead):
                     mask_pred, last_feat = mask_head(mask_feats, last_feat)
                 else:
                     mask_pred = mask_head(mask_feats)
-                outs = outs + (mask_pred, )
+                outs = outs + (mask_pred,)
         return outs
 
     def _bbox_forward_train(self,
@@ -597,7 +597,7 @@ class HybridTaskCascadeRoIHead(CascadeRoIHead):
                         mask_semantic_feat = self.semantic_roi_extractor(
                             [semantic_feat], mask_rois)
                         if mask_semantic_feat.shape[-2:] != mask_feats.shape[
-                                -2:]:
+                                                            -2:]:
                             mask_semantic_feat = F.adaptive_avg_pool2d(
                                 mask_semantic_feat, mask_feats.shape[-2:])
                         mask_feats += mask_semantic_feat

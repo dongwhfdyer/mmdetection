@@ -169,8 +169,8 @@ class ResultVisualizer:
                 dataset, results, topk=topk)
         else:
             raise 'The format of result is not supported yet. ' \
-                'Current dict for panoptic segmentation and list ' \
-                'for object detection are supported.'
+                  'Current dict for panoptic segmentation and list ' \
+                  'for object detection are supported.'
 
         good_dir = osp.abspath(osp.join(show_dir, 'good'))
         bad_dir = osp.abspath(osp.join(show_dir, 'bad'))
@@ -204,7 +204,7 @@ class ResultVisualizer:
 
         prog_bar = mmcv.ProgressBar(len(results))
         _mAPs = {}
-        for i, (result, ) in enumerate(zip(results)):
+        for i, (result,) in enumerate(zip(results)):
             # self.dataset[i] should not call directly
             # because there is a risk of mismatch
             data_info = dataset.prepare_train_img(i)
@@ -298,7 +298,7 @@ def parse_args():
         default=20,
         type=int,
         help='saved Number of the highest topk '
-        'and lowest topk after index sorting')
+             'and lowest topk after index sorting')
     parser.add_argument(
         '--show-score-thr',
         type=float,
@@ -308,20 +308,20 @@ def parse_args():
         '--overlay-gt-pred',
         action='store_true',
         help='whether to plot gts and predictions on the same image.'
-        'If False, predictions and gts will be plotted on two same'
-        'image which will be concatenated in vertical direction.'
-        'The image above is drawn with gt, and the image below is'
-        'drawn with the prediction result.')
+             'If False, predictions and gts will be plotted on two same'
+             'image which will be concatenated in vertical direction.'
+             'The image above is drawn with gt, and the image below is'
+             'drawn with the prediction result.')
     parser.add_argument(
         '--cfg-options',
         nargs='+',
         action=DictAction,
         help='override some settings in the used config, the key-value pair '
-        'in xxx=yyy format will be merged into config file. If the value to '
-        'be overwritten is a list, it should be like key="[a,b]" or key=a,b '
-        'It also allows nested list/tuple values, e.g. key="[(a,b),(c,d)]" '
-        'Note that the quotation marks are necessary and that no white space '
-        'is allowed.')
+             'in xxx=yyy format will be merged into config file. If the value to '
+             'be overwritten is a list, it should be like key="[a,b]" or key=a,b '
+             'It also allows nested list/tuple values, e.g. key="[(a,b),(c,d)]" '
+             'Note that the quotation marks are necessary and that no white space '
+             'is allowed.')
     args = parser.parse_args()
     return args
 

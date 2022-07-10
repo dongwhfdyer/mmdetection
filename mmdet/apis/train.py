@@ -37,7 +37,7 @@ def init_random_seed(seed=None, device='cuda'):
     # some potential bugs. Please refer to
     # https://github.com/open-mmlab/mmdetection/issues/6339
     rank, world_size = get_dist_info()
-    seed = np.random.randint(2**31)
+    seed = np.random.randint(2 ** 31)
     if world_size == 1:
         return seed
 
@@ -121,7 +121,6 @@ def train_detector(model,
                    validate=False,
                    timestamp=None,
                    meta=None):
-
     cfg = compat_cfg(cfg)
     logger = get_root_logger(log_level=cfg.log_level)
 

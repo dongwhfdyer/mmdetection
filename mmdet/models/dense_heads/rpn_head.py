@@ -178,7 +178,7 @@ class RPNHead(AnchorHead):
             mlvl_bbox_preds.append(rpn_bbox_pred)
             mlvl_valid_anchors.append(anchors)
             level_ids.append(
-                scores.new_full((scores.size(0), ),
+                scores.new_full((scores.size(0),),
                                 level_idx,
                                 dtype=torch.long))
 

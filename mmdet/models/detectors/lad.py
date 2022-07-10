@@ -42,7 +42,7 @@ class LAD(KnowledgeDistillationSingleStageDetector):
     def with_teacher_neck(self):
         """bool: whether the detector has a teacher_neck"""
         return hasattr(self.teacher_model, 'neck') and \
-            self.teacher_model.neck is not None
+               self.teacher_model.neck is not None
 
     def extract_teacher_feat(self, img):
         """Directly extract teacher features from the backbone+neck."""

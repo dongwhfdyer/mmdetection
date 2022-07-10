@@ -124,7 +124,7 @@ def pq_compute_single_core(proc_id,
             if gt_segms[gt_label]['iscrowd'] == 1:
                 continue
             if gt_segms[gt_label]['category_id'] != pred_segms[pred_label][
-                    'category_id']:
+                'category_id']:
                 continue
 
             union = pred_segms[pred_label]['area'] + gt_segms[gt_label][

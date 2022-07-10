@@ -159,8 +159,8 @@ class TransformerEncoderPixelDecoder(PixelDecoder):
         self.encoder = build_transformer_layer_sequence(encoder)
         self.encoder_embed_dims = self.encoder.embed_dims
         assert self.encoder_embed_dims == feat_channels, 'embed_dims({}) of ' \
-            'tranformer encoder must equal to feat_channels({})'.format(
-                feat_channels, self.encoder_embed_dims)
+                                                         'tranformer encoder must equal to feat_channels({})'.format(
+            feat_channels, self.encoder_embed_dims)
         self.positional_encoding = build_positional_encoding(
             positional_encoding)
         self.encoder_in_proj = Conv2d(

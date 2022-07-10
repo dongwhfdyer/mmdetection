@@ -124,7 +124,7 @@ class CascadeRoIHead(BaseRoIHead, BBoxTestMixin, MaskTestMixin):
             mask_rois = rois[:100]
             for i in range(self.num_stages):
                 mask_results = self._mask_forward(i, x, mask_rois)
-                outs = outs + (mask_results['mask_pred'], )
+                outs = outs + (mask_results['mask_pred'],)
         return outs
 
     def _bbox_forward(self, stage, x, rois):
@@ -610,7 +610,7 @@ class CascadeRoIHead(BaseRoIHead, BBoxTestMixin, MaskTestMixin):
             batch_index = torch.arange(
                 det_bboxes.size(0),
                 device=det_bboxes.device).float().view(-1, 1, 1).expand(
-                    det_bboxes.size(0), det_bboxes.size(1), 1)
+                det_bboxes.size(0), det_bboxes.size(1), 1)
             rois = det_bboxes[..., :4]
             mask_rois = torch.cat([batch_index, rois], dim=-1)
             mask_rois = mask_rois.view(-1, 5)

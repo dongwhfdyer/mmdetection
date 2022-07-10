@@ -28,7 +28,7 @@ def test_mask2former_head_loss(num_stuff_classes, label_num):
         'ori_shape': (60, 80, 3)
     }]
     feats = [
-        torch.rand((2, 64 * 2**i, 4 * 2**(3 - i), 5 * 2**(3 - i)))
+        torch.rand((2, 64 * 2 ** i, 4 * 2 ** (3 - i), 5 * 2 ** (3 - i)))
         for i in range(4)
     ]
     all_cls_scores, all_mask_preds = self.forward(feats, img_metas)
@@ -112,7 +112,7 @@ def _init_model(num_stuff_classes):
     config = ConfigDict(
         dict(
             type='Mask2FormerHead',
-            in_channels=[base_channels * 2**i for i in range(4)],
+            in_channels=[base_channels * 2 ** i for i in range(4)],
             feat_channels=base_channels,
             out_channels=base_channels,
             num_things_classes=num_things_classes,

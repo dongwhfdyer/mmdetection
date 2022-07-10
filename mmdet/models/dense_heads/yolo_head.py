@@ -180,7 +180,7 @@ class YOLOV3Head(BaseDenseHead, BBoxTestMixin):
             # init objectness with prior of 8 objects per feature map
             # refer to https://github.com/ultralytics/yolov3
             nn.init.constant_(bias.data[:, 4],
-                              bias_init_with_prob(8 / (608 / stride)**2))
+                              bias_init_with_prob(8 / (608 / stride) ** 2))
             nn.init.constant_(bias.data[:, 5:], bias_init_with_prob(0.01))
 
     def forward(self, feats):
@@ -205,7 +205,7 @@ class YOLOV3Head(BaseDenseHead, BBoxTestMixin):
 
         return tuple(pred_maps),
 
-    @force_fp32(apply_to=('pred_maps', ))
+    @force_fp32(apply_to=('pred_maps',))
     def get_bboxes(self,
                    pred_maps,
                    img_metas,
@@ -265,7 +265,7 @@ class YOLOV3Head(BaseDenseHead, BBoxTestMixin):
                                                 flatten_strides.unsqueeze(-1))
 
         if with_nms and (flatten_objectness.size(0) == 0):
-            return torch.zeros((0, 5)), torch.zeros((0, ))
+            return torch.zeros((0, 5)), torch.zeros((0,))
 
         if rescale:
             flatten_bboxes /= flatten_bboxes.new_tensor(
@@ -297,7 +297,7 @@ class YOLOV3Head(BaseDenseHead, BBoxTestMixin):
             det_results.append(tuple([det_bboxes, det_labels]))
         return det_results
 
-    @force_fp32(apply_to=('pred_maps', ))
+    @force_fp32(apply_to=('pred_maps',))
     def loss(self,
              pred_maps,
              gt_bboxes,
@@ -480,7 +480,7 @@ class YOLOV3Head(BaseDenseHead, BBoxTestMixin):
             gt_labels, num_classes=self.num_classes).float()
         if self.one_hot_smoother != 0:  # label smooth
             gt_labels_one_hot = gt_labels_one_hot * (
-                1 - self.one_hot_smoother
+                    1 - self.one_hot_smoother
             ) + self.one_hot_smoother / self.num_classes
         target_map[sampling_result.pos_inds, 5:] = gt_labels_one_hot[
             sampling_result.pos_assigned_gt_inds]
@@ -566,13 +566,13 @@ class YOLOV3Head(BaseDenseHead, BBoxTestMixin):
                     -1, 1).expand_as(topk_inds).long()
                 # Avoid onnx2tensorrt issue in https://github.com/NVIDIA/TensorRT/issues/1134 # noqa: E501
                 transformed_inds = (
-                    bbox_pred.shape[1] * batch_inds + topk_inds)
+                        bbox_pred.shape[1] * batch_inds + topk_inds)
                 bbox_pred = bbox_pred.reshape(-1,
                                               4)[transformed_inds, :].reshape(
-                                                  batch_size, -1, 4)
+                    batch_size, -1, 4)
                 cls_pred = cls_pred.reshape(
                     -1, self.num_classes)[transformed_inds, :].reshape(
-                        batch_size, -1, self.num_classes)
+                    batch_size, -1, self.num_classes)
                 conf_pred = conf_pred.reshape(-1, 1)[transformed_inds].reshape(
                     batch_size, -1)
 

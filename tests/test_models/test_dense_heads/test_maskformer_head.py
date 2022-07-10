@@ -22,7 +22,7 @@ def test_maskformer_head_loss():
         'ori_shape': (60, 80, 3)
     }]
     feats = [
-        torch.rand((2, 64 * 2**i, 4 * 2**(3 - i), 5 * 2**(3 - i)))
+        torch.rand((2, 64 * 2 ** i, 4 * 2 ** (3 - i), 5 * 2 ** (3 - i)))
         for i in range(4)
     ]
     num_things_classes = 80
@@ -31,7 +31,7 @@ def test_maskformer_head_loss():
     config = ConfigDict(
         dict(
             type='MaskFormerHead',
-            in_channels=[base_channels * 2**i for i in range(4)],
+            in_channels=[base_channels * 2 ** i for i in range(4)],
             feat_channels=base_channels,
             out_channels=base_channels,
             num_things_classes=num_things_classes,

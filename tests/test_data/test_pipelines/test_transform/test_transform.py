@@ -601,7 +601,7 @@ def test_random_center_crop_pad():
     train_transform = dict(
         type='RandomCenterCropPad',
         crop_size=(h - 20, w - 20),
-        ratios=(1.0, ),
+        ratios=(1.0,),
         border=128,
         mean=[123.675, 116.28, 103.53],
         std=[58.395, 57.12, 57.375],
@@ -1084,7 +1084,7 @@ def test_copypaste():
     assert ori_mask.sum() > occ_mask.sum()
     assert np.all(np.abs(occ_bbox - ori_bbox) <=
                   copypaste_module.bbox_occluded_thr) or \
-        occ_mask.sum() > copypaste_module.mask_occluded_thr
+           occ_mask.sum() > copypaste_module.mask_occluded_thr
     # test copypaste with selected objects
     transform = dict(type='CopyPaste')
     copypaste_module = build_from_cfg(transform, PIPELINES)

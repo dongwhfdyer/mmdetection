@@ -216,7 +216,7 @@ class HourglassNet(BaseModule):
             if ind < self.num_stacks - 1:
                 inter_feat = self.conv1x1s[ind](
                     inter_feat) + self.remap_convs[ind](
-                        out_feat)
+                    out_feat)
                 inter_feat = self.inters[ind](self.relu(inter_feat))
 
         return out_feats

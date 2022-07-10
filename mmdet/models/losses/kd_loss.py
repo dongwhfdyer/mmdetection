@@ -31,7 +31,7 @@ def knowledge_distillation_kl_div_loss(pred,
 
     kd_loss = F.kl_div(
         F.log_softmax(pred / T, dim=1), target, reduction='none').mean(1) * (
-            T * T)
+                      T * T)
 
     return kd_loss
 

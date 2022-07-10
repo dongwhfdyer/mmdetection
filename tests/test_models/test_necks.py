@@ -12,7 +12,7 @@ def test_fpn():
     """Tests fpn."""
     s = 64
     in_channels = [8, 16, 32, 64]
-    feat_sizes = [s // 2**i for i in range(4)]  # [64, 32, 16, 8]
+    feat_sizes = [s // 2 ** i for i in range(4)]  # [64, 32, 16, 8]
     out_channels = 8
 
     # end_level=-1 is equal to end_level=3
@@ -83,7 +83,7 @@ def test_fpn():
     assert len(outs) == fpn_model.num_outs
     for i in range(fpn_model.num_outs):
         outs[i].shape[1] == out_channels
-        outs[i].shape[2] == outs[i].shape[3] == s // (2**i)
+        outs[i].shape[2] == outs[i].shape[3] == s // (2 ** i)
 
     # Tests for fpn with no extra convs (pooling is used instead)
     fpn_model = FPN(
@@ -97,7 +97,7 @@ def test_fpn():
     assert not fpn_model.add_extra_convs
     for i in range(fpn_model.num_outs):
         outs[i].shape[1] == out_channels
-        outs[i].shape[2] == outs[i].shape[3] == s // (2**i)
+        outs[i].shape[2] == outs[i].shape[3] == s // (2 ** i)
 
     # Tests for fpn with lateral bns
     fpn_model = FPN(
@@ -113,7 +113,7 @@ def test_fpn():
     assert fpn_model.add_extra_convs == 'on_input'
     for i in range(fpn_model.num_outs):
         outs[i].shape[1] == out_channels
-        outs[i].shape[2] == outs[i].shape[3] == s // (2**i)
+        outs[i].shape[2] == outs[i].shape[3] == s // (2 ** i)
     bn_exist = False
     for m in fpn_model.modules():
         if isinstance(m, _BatchNorm):
@@ -134,7 +134,7 @@ def test_fpn():
     assert fpn_model.add_extra_convs == 'on_input'
     for i in range(fpn_model.num_outs):
         outs[i].shape[1] == out_channels
-        outs[i].shape[2] == outs[i].shape[3] == s // (2**i)
+        outs[i].shape[2] == outs[i].shape[3] == s // (2 ** i)
 
     # Scale factor instead of fixed upsample size upsample
     fpn_model = FPN(
@@ -148,7 +148,7 @@ def test_fpn():
     assert len(outs) == fpn_model.num_outs
     for i in range(fpn_model.num_outs):
         outs[i].shape[1] == out_channels
-        outs[i].shape[2] == outs[i].shape[3] == s // (2**i)
+        outs[i].shape[2] == outs[i].shape[3] == s // (2 ** i)
 
     # Extra convs source is 'inputs'
     fpn_model = FPN(
@@ -162,7 +162,7 @@ def test_fpn():
     assert len(outs) == fpn_model.num_outs
     for i in range(fpn_model.num_outs):
         outs[i].shape[1] == out_channels
-        outs[i].shape[2] == outs[i].shape[3] == s // (2**i)
+        outs[i].shape[2] == outs[i].shape[3] == s // (2 ** i)
 
     # Extra convs source is 'laterals'
     fpn_model = FPN(
@@ -176,7 +176,7 @@ def test_fpn():
     assert len(outs) == fpn_model.num_outs
     for i in range(fpn_model.num_outs):
         outs[i].shape[1] == out_channels
-        outs[i].shape[2] == outs[i].shape[3] == s // (2**i)
+        outs[i].shape[2] == outs[i].shape[3] == s // (2 ** i)
 
     # Extra convs source is 'outputs'
     fpn_model = FPN(
@@ -190,14 +190,14 @@ def test_fpn():
     assert len(outs) == fpn_model.num_outs
     for i in range(fpn_model.num_outs):
         outs[i].shape[1] == out_channels
-        outs[i].shape[2] == outs[i].shape[3] == s // (2**i)
+        outs[i].shape[2] == outs[i].shape[3] == s // (2 ** i)
 
 
 def test_channel_mapper():
     """Tests ChannelMapper."""
     s = 64
     in_channels = [8, 16, 32, 64]
-    feat_sizes = [s // 2**i for i in range(4)]  # [64, 32, 16, 8]
+    feat_sizes = [s // 2 ** i for i in range(4)]  # [64, 32, 16, 8]
     out_channels = 8
     kernel_size = 3
     feats = [
@@ -227,7 +227,7 @@ def test_channel_mapper():
     assert len(outs) == len(feats)
     for i in range(len(feats)):
         outs[i].shape[1] == out_channels
-        outs[i].shape[2] == outs[i].shape[3] == s // (2**i)
+        outs[i].shape[2] == outs[i].shape[3] == s // (2 ** i)
 
 
 def test_dilated_encoder():
@@ -252,7 +252,7 @@ def test_ct_resnet_neck():
         CTResNetNeck(
             in_channel=10,
             num_deconv_filters=(10, 10),
-            num_deconv_kernels=(4, ))
+            num_deconv_kernels=(4,))
 
     in_channels = 16
     num_filters = (8, 8)
@@ -299,7 +299,7 @@ def test_yolov3_neck():
     s = 32
     in_channels = [16, 8, 4]
     out_channels = [8, 4, 2]
-    feat_sizes = [s // 2**i for i in range(len(in_channels) - 1, -1, -1)]
+    feat_sizes = [s // 2 ** i for i in range(len(in_channels) - 1, -1, -1)]
     feats = [
         torch.rand(1, in_channels[i], feat_sizes[i], feat_sizes[i])
         for i in range(len(in_channels) - 1, -1, -1)
@@ -317,7 +317,7 @@ def test_yolov3_neck():
     s = 32
     in_channels = [32, 8, 16]
     out_channels = [19, 21, 5]
-    feat_sizes = [s // 2**i for i in range(len(in_channels) - 1, -1, -1)]
+    feat_sizes = [s // 2 ** i for i in range(len(in_channels) - 1, -1, -1)]
     feats = [
         torch.rand(1, in_channels[i], feat_sizes[i], feat_sizes[i])
         for i in range(len(in_channels) - 1, -1, -1)
@@ -370,7 +370,7 @@ def test_ssd_neck():
         out_channels=[4, 8, 16],
         level_strides=[2, 1],
         level_paddings=[1, 0])
-    feats = (torch.rand(1, 4, 16, 16), )
+    feats = (torch.rand(1, 4, 16, 16),)
     outs = ssd_neck(feats)
     assert outs[0].shape == (1, 4, 16, 16)
     assert outs[1].shape == (1, 8, 8, 8)
@@ -402,7 +402,7 @@ def test_ssd_neck():
 def test_yolox_pafpn():
     s = 64
     in_channels = [8, 16, 32, 64]
-    feat_sizes = [s // 2**i for i in range(4)]  # [64, 32, 16, 8]
+    feat_sizes = [s // 2 ** i for i in range(4)]  # [64, 32, 16, 8]
     out_channels = 24
     feats = [
         torch.rand(1, in_channels[i], feat_sizes[i], feat_sizes[i])
@@ -413,7 +413,7 @@ def test_yolox_pafpn():
     assert len(outs) == len(feats)
     for i in range(len(feats)):
         assert outs[i].shape[1] == out_channels
-        assert outs[i].shape[2] == outs[i].shape[3] == s // (2**i)
+        assert outs[i].shape[2] == outs[i].shape[3] == s // (2 ** i)
 
     # test depth-wise
     neck = YOLOXPAFPN(
@@ -426,14 +426,14 @@ def test_yolox_pafpn():
     assert len(outs) == len(feats)
     for i in range(len(feats)):
         assert outs[i].shape[1] == out_channels
-        assert outs[i].shape[2] == outs[i].shape[3] == s // (2**i)
+        assert outs[i].shape[2] == outs[i].shape[3] == s // (2 ** i)
 
 
 def test_dyhead():
     s = 64
     in_channels = 8
     out_channels = 16
-    feat_sizes = [s // 2**i for i in range(4)]  # [64, 32, 16, 8]
+    feat_sizes = [s // 2 ** i for i in range(4)]  # [64, 32, 16, 8]
     feats = [
         torch.rand(1, in_channels, feat_sizes[i], feat_sizes[i])
         for i in range(len(feat_sizes))
@@ -444,7 +444,7 @@ def test_dyhead():
     assert len(outs) == len(feats)
     for i in range(len(outs)):
         assert outs[i].shape[1] == out_channels
-        assert outs[i].shape[2] == outs[i].shape[3] == s // (2**i)
+        assert outs[i].shape[2] == outs[i].shape[3] == s // (2 ** i)
 
     feat = torch.rand(1, 8, 4, 4)
     # input feat must be tuple or list
@@ -499,7 +499,7 @@ def test_fpg():
             order=('act', 'conv', 'norm'),
             inplace=False),
         norm_cfg=norm_cfg,
-        skip_inds=[(0, 1, 2, 3), (0, 1, 2), (0, 1), (0, ), ()])
+        skip_inds=[(0, 1, 2, 3), (0, 1, 2), (0, 1), (0,), ()])
     FPG(in_channels=[8, 16, 32, 64],
         out_channels=8,
         inter_channels=8,
@@ -544,7 +544,7 @@ def test_fpg():
             order=('act', 'conv', 'norm'),
             inplace=False),
         norm_cfg=norm_cfg,
-        skip_inds=[(0, 1, 2, 3), (0, 1, 2), (0, 1), (0, ), ()])
+        skip_inds=[(0, 1, 2, 3), (0, 1, 2), (0, 1), (0,), ()])
 
     # `end_level` is larger than len(in_channels) - 1
     with pytest.raises(AssertionError):
@@ -555,7 +555,7 @@ def test_fpg():
             start_level=1,
             end_level=4,
             num_outs=2,
-            skip_inds=[(0, 1, 2, 3), (0, 1, 2), (0, 1), (0, ), ()])
+            skip_inds=[(0, 1, 2, 3), (0, 1, 2), (0, 1), (0,), ()])
 
     # `num_outs` is not equal to end_level - start_level + 1
     with pytest.raises(AssertionError):
@@ -566,7 +566,7 @@ def test_fpg():
             start_level=1,
             end_level=2,
             num_outs=3,
-            skip_inds=[(0, 1, 2, 3), (0, 1, 2), (0, 1), (0, ), ()])
+            skip_inds=[(0, 1, 2, 3), (0, 1, 2), (0, 1), (0,), ()])
 
 
 def test_fpn_carafe():

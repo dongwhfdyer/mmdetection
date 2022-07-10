@@ -64,7 +64,6 @@ def compat_loader_args(cfg):
 
     # special process for train_dataloader
     if 'samples_per_gpu' in cfg.data:
-
         samples_per_gpu = cfg.data.pop('samples_per_gpu')
         assert 'samples_per_gpu' not in \
                cfg.data.train_dataloader, ('`samples_per_gpu` are set '
@@ -76,7 +75,6 @@ def compat_loader_args(cfg):
         cfg.data.train_dataloader['samples_per_gpu'] = samples_per_gpu
 
     if 'persistent_workers' in cfg.data:
-
         persistent_workers = cfg.data.pop('persistent_workers')
         assert 'persistent_workers' not in \
                cfg.data.train_dataloader, ('`persistent_workers` are set '
@@ -88,7 +86,6 @@ def compat_loader_args(cfg):
         cfg.data.train_dataloader['persistent_workers'] = persistent_workers
 
     if 'workers_per_gpu' in cfg.data:
-
         workers_per_gpu = cfg.data.pop('workers_per_gpu')
         cfg.data.train_dataloader['workers_per_gpu'] = workers_per_gpu
         cfg.data.val_dataloader['workers_per_gpu'] = workers_per_gpu

@@ -38,7 +38,7 @@ data = dict(
         img_prefix=data_root + 'OpenImages/train/',
         label_file=data_root + 'annotations/class-descriptions-boxable.csv',
         hierarchy_file=data_root +
-        'annotations/bbox_labels_600_hierarchy.json',
+                       'annotations/bbox_labels_600_hierarchy.json',
         pipeline=train_pipeline),
     val=dict(
         type=dataset_type,
@@ -46,10 +46,10 @@ data = dict(
         img_prefix=data_root + 'OpenImages/validation/',
         label_file=data_root + 'annotations/class-descriptions-boxable.csv',
         hierarchy_file=data_root +
-        'annotations/bbox_labels_600_hierarchy.json',
+                       'annotations/bbox_labels_600_hierarchy.json',
         meta_file=data_root + 'annotations/validation-image-metas.pkl',
         image_level_ann_file=data_root +
-        'annotations/validation-annotations-human-imagelabels-boxable.csv',
+                             'annotations/validation-annotations-human-imagelabels-boxable.csv',
         pipeline=test_pipeline),
     test=dict(
         type=dataset_type,
@@ -57,9 +57,9 @@ data = dict(
         img_prefix=data_root + 'OpenImages/validation/',
         label_file=data_root + 'annotations/class-descriptions-boxable.csv',
         hierarchy_file=data_root +
-        'annotations/bbox_labels_600_hierarchy.json',
+                       'annotations/bbox_labels_600_hierarchy.json',
         meta_file=data_root + 'annotations/validation-image-metas.pkl',
         image_level_ann_file=data_root +
-        'annotations/validation-annotations-human-imagelabels-boxable.csv',
+                             'annotations/validation-annotations-human-imagelabels-boxable.csv',
         pipeline=test_pipeline))
 evaluation = dict(interval=1, metric='mAP')

@@ -88,8 +88,8 @@ class YOLACT(SingleStageDetector):
 
         # check NaN and Inf
         for loss_name in losses.keys():
-            assert torch.isfinite(torch.stack(losses[loss_name]))\
-                .all().item(), '{} becomes infinite or NaN!'\
+            assert torch.isfinite(torch.stack(losses[loss_name])) \
+                .all().item(), '{} becomes infinite or NaN!' \
                 .format(loss_name)
 
         return losses

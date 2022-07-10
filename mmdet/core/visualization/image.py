@@ -438,7 +438,7 @@ def imshow_gt_det_bboxes(img,
     assert 'gt_bboxes' in annotation
     assert 'gt_labels' in annotation
     assert isinstance(result, (tuple, list, dict)), 'Expected ' \
-        f'tuple or list or dict, but get {type(result)}'
+                                                    f'tuple or list or dict, but get {type(result)}'
 
     gt_bboxes = annotation['gt_bboxes']
     gt_labels = annotation['gt_labels']

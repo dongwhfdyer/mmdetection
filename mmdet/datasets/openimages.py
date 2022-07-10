@@ -255,13 +255,13 @@ class OpenImagesDataset(CustomDataset):
             is_insides.append(obj['is_inside'])
         if not bboxes:
             bboxes = np.zeros((0, 4))
-            labels = np.zeros((0, ))
+            labels = np.zeros((0,))
         else:
             bboxes = np.array(bboxes)
             labels = np.array(labels)
         if not bboxes_ignore:
             bboxes_ignore = np.zeros((0, 4))
-            labels_ignore = np.zeros((0, ))
+            labels_ignore = np.zeros((0,))
         else:
             bboxes_ignore = np.array(bboxes_ignore)
             labels_ignore = np.array(labels_ignore)
@@ -573,14 +573,14 @@ class OpenImagesDataset(CustomDataset):
                     confidences.append(confidence)
 
                 if not image_level_labels:
-                    image_level_labels = np.zeros((0, ))
-                    confidences = np.zeros((0, ))
+                    image_level_labels = np.zeros((0,))
+                    confidences = np.zeros((0,))
                 else:
                     image_level_labels = np.array(image_level_labels)
                     confidences = np.array(confidences)
             else:
-                image_level_labels = np.zeros((0, ))
-                confidences = np.zeros((0, ))
+                image_level_labels = np.zeros((0,))
+                confidences = np.zeros((0,))
             ann = dict(
                 image_level_labels=image_level_labels.astype(np.int64),
                 confidences=confidences.astype(np.float32))

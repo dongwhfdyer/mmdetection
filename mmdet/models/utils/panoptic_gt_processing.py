@@ -31,7 +31,7 @@ def preprocess_panoptic_gt(gt_labels, gt_masks, gt_semantic_seg, num_things,
     """
     num_classes = num_things + num_stuff
 
-    things_masks = gt_masks.pad(img_metas['pad_shape'][:2], pad_val=0)\
+    things_masks = gt_masks.pad(img_metas['pad_shape'][:2], pad_val=0) \
         .to_tensor(dtype=torch.bool, device=gt_labels.device)
 
     if gt_semantic_seg is None:

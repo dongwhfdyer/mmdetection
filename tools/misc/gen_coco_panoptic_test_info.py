@@ -7,7 +7,7 @@ import mmcv
 def parse_args():
     parser = argparse.ArgumentParser(
         description='Generate COCO test image information '
-        'for COCO panoptic segmentation.')
+                    'for COCO panoptic segmentation.')
     parser.add_argument('data_root', help='Path to COCO annotation directory.')
     args = parser.parse_args()
 

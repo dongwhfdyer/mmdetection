@@ -10,8 +10,8 @@ from mmdet.datasets import OpenImagesChallengeDataset, OpenImagesDataset
 
 
 def _create_ids_error_oid_csv(
-    label_file,
-    fake_csv_file,
+        label_file,
+        fake_csv_file,
 ):
     label_description = ['/m/000002', 'Football']
     # `newline=''` is used to avoid index error of out of bounds
@@ -29,10 +29,10 @@ def _create_ids_error_oid_csv(
         'color', 'xclick', '/m/000002', '1', '0.022673031', '0.9642005',
         '0.07103825', '0.80054647', '0', '0', '0', '0', '0'
     ],
-                   [
-                       '000595fe6fee6369', 'xclick', '/m/000000', '1', '0',
-                       '1', '0', '1', '0', '0', '1', '0', '0'
-                   ]]
+        [
+            '000595fe6fee6369', 'xclick', '/m/000000', '1', '0',
+            '1', '0', '1', '0', '0', '1', '0', '0'
+        ]]
     # `newline=''` is used to avoid index error of out of bounds
     # in Windows system
     with open(fake_csv_file, 'w', newline='') as f:
@@ -84,7 +84,7 @@ def _create_oid_style_ann(label_file, csv_file, label_level_file):
 
 def _create_hierarchy_json(hierarchy_name):
     fake_hierarchy = \
-        {'LabelName':  '/m/0bl9f',      # entity label
+        {'LabelName': '/m/0bl9f',  # entity label
          'Subcategory': [
              {
                  'LabelName': '/m/000000',
@@ -164,7 +164,6 @@ def _creat_oid_challenge_style_ann(txt_file, label_file, label_level_file):
 
 
 def _create_metas(meta_file):
-
     fake_meta = [{
         'filename': 'data/OpenImages/OpenImages/validation/color.jpg',
         'ori_shape': (300, 300, 3)

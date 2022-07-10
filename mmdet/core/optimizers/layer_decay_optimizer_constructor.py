@@ -127,7 +127,7 @@ class LearningRateDecayOptimizerConstructor(DefaultOptimizerConstructor):
             group_name = f'layer_{layer_id}_{group_name}'
 
             if group_name not in parameter_groups:
-                scale = decay_rate**(num_layers - layer_id - 1)
+                scale = decay_rate ** (num_layers - layer_id - 1)
 
                 parameter_groups[group_name] = {
                     'weight_decay': this_weight_decay,

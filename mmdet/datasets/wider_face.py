@@ -15,7 +15,7 @@ class WIDERFaceDataset(XMLDataset):
     Conversion scripts can be found in
     https://github.com/sovrasov/wider-face-pascal-voc-annotations
     """
-    CLASSES = ('face', )
+    CLASSES = ('face',)
 
     PALETTE = [(0, 255, 0)]
 
