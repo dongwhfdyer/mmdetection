@@ -9,22 +9,26 @@ import warnings
 import mmcv
 import torch
 import torch.distributed as dist
-from mmcv import Config, DictAction
+from mmcv import Config, DictAction, build_from_cfg
 from mmcv.runner import get_dist_info, init_dist
 from mmcv.utils import get_git_hash
 
 from mmdet import __version__
 from mmdet.apis import init_random_seed, set_random_seed, train_detector
 from mmdet.datasets import build_dataset
-from mmdet.models import build_detector
+from mmdet.models import build_detector, DETECTORS
 from mmdet.utils import (collect_env, get_device, get_root_logger,
                          replace_cfg_vals, setup_multi_processes,
                          update_data_root)
 
 
 def parse_args():
+    # ---------kkuhn-block------------------------------ param settings
+    config_file = "../configs/faster_rcnn/faster_rcnn_r50_fpn_1x_coco.py"
+    # ---------kkuhn-block------------------------------
+
     parser = argparse.ArgumentParser(description='Train a detector')
-    parser.add_argument('config', help='train config file path')
+    parser.add_argument('--config', default=config_file, help='train config file path')  # kuhn edited
     parser.add_argument('--work-dir', help='the dir to save logs and models')
     parser.add_argument(
         '--resume-from', help='the checkpoint file to resume from')
@@ -83,7 +87,7 @@ def parse_args():
     parser.add_argument(
         '--launcher',
         choices=['none', 'pytorch', 'slurm', 'mpi'],
-        default='none',
+        default='pytorch',  # todo
         help='job launcher')
     parser.add_argument('--local_rank', type=int, default=0)
     parser.add_argument(
@@ -103,6 +107,16 @@ def parse_args():
         args.cfg_options = args.options
 
     return args
+
+
+def rubb_try():
+    args = parse_args()
+    cfg = Config.fromfile(args.config)
+    train_cfg = cfg.get('train_cfg'),
+    test_cfg = cfg.get('test_cfg')
+
+    build_from_cfg(cfg, default_args=dict(train_cfg=train_cfg, test_cfg=test_cfg))
+    pass
 
 
 def main():
@@ -239,4 +253,7 @@ def main():
 
 
 if __name__ == '__main__':
-    main()
+    # #---------kkuhn-block------------------------------ original code
+    # main()
+    # #---------kkuhn-block------------------------------
+    rubb_try()

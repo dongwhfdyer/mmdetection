@@ -9,15 +9,15 @@ from mmdet.apis import inference_detector, init_detector
 
 def parse_args():
     parser = argparse.ArgumentParser(description='MMDetection video demo')
-    parser.add_argument('video', help='Video file')
-    parser.add_argument('config', help='Config file')
-    parser.add_argument('checkpoint', help='Checkpoint file')
+    parser.add_argument('--video', help='Video file', default='../demo/demo.mp4', type=str)
+    parser.add_argument('--config', help='Config file', default='../configs/faster_rcnn/faster_rcnn_r50_fpn_1x_coco.py', type=str)
+    parser.add_argument('--checkpoint', help='Checkpoint file', default='../checkpoints/faster_rcnn_r50_fpn_1x_coco_20200130-047c8118.pth', type=str)
     parser.add_argument(
         '--device', default='cuda:0', help='Device used for inference')
     parser.add_argument(
         '--score-thr', type=float, default=0.3, help='Bbox score threshold')
-    parser.add_argument('--out', type=str, help='Output video file')
-    parser.add_argument('--show', action='store_true', help='Show video')
+    parser.add_argument('--out', type=str, help='Output video file',default='result/test1')
+    parser.add_argument('--show', action='store_true', help='Show video',default=True)
     parser.add_argument(
         '--wait-time',
         type=float,
